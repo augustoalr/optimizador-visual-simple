@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizador Visual Simple</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Optimizador Visual Simple 🖼️</h1>
+            <p>Sube tus imágenes, elige un porcentaje de reducción y descárgalas optimizadas.</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <h2>Paso 1: Carga tus Imágenes</h2>
+                <div class="drop-zone" id="dropZone">
+                    <p>Arrastra y suelta tus imágenes aquí o haz clic para seleccionar</p>
+                    <input type="file" id="fileInput" multiple accept="image/jpeg, image/png, image/webp">
+                </div>
+                <small>Límite por imagen: 10MB. Formatos aceptados: JPG, PNG, WEBP.</small>
+            </section>
+
+            <section class="controls-section">
+                <h2>Paso 2: Define el Porcentaje de Reducción</h2>
+                <div class="percentage-control">
+                    <label for="percentageSlider">Reducir al:</label>
+                    <input type="range" id="percentageSlider" min="10" max="90" value="50">
+                    <span id="percentageValue">50%</span>
+                </div>
+                <button id="applyResizeButton" class="cta-button" disabled>Aplicar y Previsualizar</button>
+            </section>
+
+            <section class="preview-section">
+                <h2>Paso 3: Previsualiza y Descarga</h2>
+                <div id="imagePreviewContainer" class="image-grid">
+                    </div>
+                <div id="previewActions" style="display: none; text-align: center; margin-top: 20px;">
+                    <button id="downloadAllButton" class="cta-button">Descargar Todas (.zip)</button>
+                    <button id="clearAllButton" class="cta-button secondary">Limpiar Todo</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Tico - Creado con ❤️</p>
+        </footer>
+    </div>
+
+    <div id="zoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalButton">&times;</span>
+            <h3 id="modalImageName"></h3>
+            <div class="modal-image-container">
+                <img id="zoomedImage" src="#" alt="Vista Previa Ampliada">
+            </div>
+            <div class="zoom-controls">
+                <button id="zoomInButton">+</button>
+                <button id="zoomOutButton">-</button>
+                <span id="zoomLevel">100%</span>
+            </div>
+            <div class="image-info">
+                <p><strong>Original:</strong> <span id="originalDimensions"></span>, <span id="originalSize"></span></p>
+                <p><strong>Redimensionada:</strong> <span id="newDimensions"></span>, <span id="newSize"></span></p>
+            </div>
+            <button id="downloadSingleModalButton" class="cta-button">Descargar Esta Imagen</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

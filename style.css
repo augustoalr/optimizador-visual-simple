@@ -1,0 +1,316 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    background-color: #fff;
+    padding: 25px 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.upload-section, .controls-section, .preview-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fdfdfd;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+}
+
+h2 {
+    color: #34495e;
+    margin-top: 0;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+.drop-zone {
+    border: 3px dashed #3498db;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #ecf0f1;
+    transition: background-color 0.3s ease;
+}
+
+.drop-zone.dragover {
+    background-color: #d1e0e0;
+    border-style: solid;
+}
+
+.drop-zone p {
+    margin: 0;
+    font-size: 1.1em;
+    color: #7f8c8d;
+}
+
+.drop-zone input[type="file"] {
+    display: none;
+}
+
+.percentage-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.percentage-control label {
+    font-weight: bold;
+}
+
+#percentageSlider {
+    flex-grow: 1;
+    max-width: 300px;
+    cursor: pointer;
+}
+
+#percentageValue {
+    font-weight: bold;
+    color: #2980b9;
+    min-width: 40px; /* Para evitar que el layout salte */
+}
+
+.cta-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.cta-button:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+.cta-button:active:not(:disabled) {
+    transform: translateY(0px);
+}
+
+.cta-button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.cta-button.secondary {
+    background-color: #e74c3c;
+}
+.cta-button.secondary:hover:not(:disabled) {
+    background-color: #c0392b;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.preview-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden; /* Para el nombre de archivo */
+}
+
+.preview-item img {
+    max-width: 100%;
+    max-height: 120px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.preview-item .file-name {
+    font-size: 0.8em;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+}
+
+.preview-item .image-info-small {
+    font-size: 0.75em;
+    color: #777;
+}
+
+.preview-item .status {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.status.pending { color: #f39c12; }
+.status.processing { color: #3498db; }
+.status.done { color: #2ecc71; }
+.status.error { color: #e74c3c; }
+
+
+/* Estilos del Modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    text-align: center;
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-image-container {
+    width: 100%;
+    height: 400px; /* Altura fija para el contenedor de la imagen */
+    overflow: hidden; /* Para que el zoom funcione dentro de este contenedor */
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    background-color: #f0f0f0; /* Fondo para ver bordes de imagen */
+    display: flex; /* Centrar imagen */
+    align-items: center; /* Centrar imagen */
+    justify-content: center; /* Centrar imagen */
+}
+
+#zoomedImage {
+    max-width: 100%; /* Inicialmente se ajusta al contenedor */
+    max-height: 100%;
+    display: block;
+    cursor: grab;
+    transition: transform 0.1s ease-out; /* Para suavizar el zoom */
+}
+
+.zoom-controls {
+    margin-bottom: 15px;
+}
+
+.zoom-controls button {
+    font-size: 1.2em;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+
+.image-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+/* ... (Estilos anteriores) ... */
+
+.preview-item .delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(231, 76, 60, 0.8); /* Color rojo con transparencia */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px; /* Centrar la X verticalmente */
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: bold;
+}
+
+.preview-item .delete-btn:hover {
+    background-color: #c0392b; /* Rojo más opaco */
+}
+
+.preview-item .file-name {
+    /* Ajustar para que no se solape con el botón de eliminar */
+    padding-right: 25px; 
+}
+
+/* Ajustes para el modal para que la imagen se vea mejor */
+#zoomedImage {
+    max-width: 100%; 
+    max-height: 100%;
+    /* object-fit: contain; /* Asegura que toda la imagen sea visible dentro del contenedor */
+    display: block; /* Ya estaba */
+    cursor: grab; /* Ya estaba */
+    transition: transform 0.1s ease-out; /* Ya estaba */
+}
+
+.modal-image-container {
+    /* ... (mantener estilos existentes) ... */
+    overflow: auto; /* Cambiar a auto para permitir scroll si la imagen zoomeada es más grande */
+}
